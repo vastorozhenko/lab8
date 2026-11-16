@@ -1,0 +1,77 @@
+src/contacts.c: In function ‘print_contact’:
+src/contacts.c:66:13: warning: format not a string literal and no format arguments [-Wformat-security]
+   66 |     printf(c->name);
+      |            ~^~~~~~
+src/contacts.c: In function ‘book_del’:
+src/contacts.c:100:38: warning: pointer ‘c’ used after ‘free’ [-Wuse-after-free]
+  100 |             printf("deleted: %s\n", c->name);
+      |                                     ~^~~~~~
+src/contacts.c:96:13: note: call to ‘free’ here
+   96 |             free(c);
+      |             ^~~~~~~
+src/contacts.c: In function ‘book_find’:
+src/contacts.c:87:8: warning: use of uninitialized value ‘found’ [CWE-457] [-Wanalyzer-use-of-uninitialized-value]
+   87 |     if (!found)
+      |        ^
+  ‘main’: events 1-10
+    |
+    |  108 | int main(int argc, char *argv[])
+    |      |     ^~~~
+    |      |     |
+    |      |     (1) entry to ‘main’
+    |......
+    |  113 |     if (argc < 3) {
+    |      |        ~
+    |      |        |
+    |      |        (2) following ‘false’ branch (when ‘argc > 2’)...
+    |......
+    |  117 |     const char *path = argv[1];
+    |      |                 ~~~~
+    |      |                 |
+    |      |                 (3) ...to here
+    |......
+    |  120 |     if (book_load(&book, path) != 0) {
+    |      |        ~
+    |      |        |
+    |      |        (4) following ‘false’ branch...
+    |......
+    |  125 |     if (strcmp(cmd, "list") == 0) {
+    |      |        ~~~~~~~~~~~~~~~~~~~~
+    |      |        ||
+    |      |        |(5) ...to here
+    |      |        (6) following ‘false’ branch (when the strings are non-equal)...
+    |  126 |         book_list(&book);
+    |  127 |     } else if (strcmp(cmd, "find") == 0 && argc == 4) {
+    |      |               ~~~~~~~~~~~~~~~~~~~~
+    |      |               ||
+    |      |               |(7) ...to here
+    |      |               (8) following ‘true’ branch...
+    |  128 |         book_find(&book, argv[3]);
+    |      |         ~~~~~~~~~~~~~~~~~~~~~~~~~
+    |      |         |                    |
+    |      |         |                    (9) ...to here
+    |      |         (10) calling ‘book_find’ from ‘main’
+    |
+    +--> ‘book_find’: events 11-16
+           |
+           |   78 | static void book_find(const Book *b, const char *name)
+           |      |             ^~~~~~~~~
+           |      |             |
+           |      |             (11) entry to ‘book_find’
+           |   79 | {
+           |   80 |     int found;
+           |      |         ~~~~~
+           |      |         |
+           |      |         (12) region created on stack here
+           |      |         (13) capacity: 4 bytes
+           |   81 |     for (int i = 0; i < b->count; i++) {
+           |      |                     ~~~~~~~~~~~~
+           |      |                       |
+           |      |                       (14) following ‘false’ branch...
+           |......
+           |   87 |     if (!found)
+           |      |        ~     
+           |      |        |
+           |      |        (15) ...to here
+           |      |        (16) use of uninitialized value ‘found’ here
+           |

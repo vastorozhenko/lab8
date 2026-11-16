@@ -1,0 +1,4 @@
+Checking src/contacts.c ...
+src/contacts.c:43: style: Variable 'name' can be declared as pointer to const [constVariablePointer]
+src/contacts.c:44: style: Variable 'phone' can be declared as pointer to const [constVariablePointer]
+src/contacts.c:87: warning: Uninitialized variable: found [uninitvar]

@@ -1,0 +1,8 @@
+Stage:                                       before
+gcc -fanalyzer warnings:                     3
+cppcheck findings (error/warning):           3 (1)
+flawfinder hits (risk level 4-5):            8 (3)
+valgrind errors (all scenarios):             36
+valgrind aborted by heap corruption:         1
+valgrind definitely lost (bytes):            912
+ASan/LSan/UBSan reports:                     7

@@ -1,0 +1,222 @@
+===== scenario: list
+
+=================================================================
+==23880==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 144 byte(s) in 3 object(s) allocated from:
+    #0 0x720795afd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x58508e1394c7 in contact_new src/contacts.c:30
+    #2 0x58508e139840 in book_load src/contacts.c:47
+    #3 0x58508e13ac11 in main src/contacts.c:120
+    #4 0x720794e2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #5 0x720794e2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #6 0x58508e1393e4 in _start (/home/student/lab8/contacts-asan+0x53e4) (BuildId: 79ffd4ef829da69525efd432421353d37d00c668)
+
+SUMMARY: AddressSanitizer: 144 byte(s) leaked in 3 allocation(s).
+===== exit code: 1
+
+===== scenario: find existing contact
+
+=================================================================
+==23883==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 144 byte(s) in 3 object(s) allocated from:
+    #0 0x7e4cfbafd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x565f5661f4c7 in contact_new src/contacts.c:30
+    #2 0x565f5661f840 in book_load src/contacts.c:47
+    #3 0x565f56620c11 in main src/contacts.c:120
+    #4 0x7e4cfae2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #5 0x7e4cfae2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #6 0x565f5661f3e4 in _start (/home/student/lab8/contacts-asan+0x53e4) (BuildId: 79ffd4ef829da69525efd432421353d37d00c668)
+
+SUMMARY: AddressSanitizer: 144 byte(s) leaked in 3 allocation(s).
+===== exit code: 1
+
+===== scenario: find missing contact
+
+=================================================================
+==23886==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 144 byte(s) in 3 object(s) allocated from:
+    #0 0x71f7bb4fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x5b4609dac4c7 in contact_new src/contacts.c:30
+    #2 0x5b4609dac840 in book_load src/contacts.c:47
+    #3 0x5b4609dadc11 in main src/contacts.c:120
+    #4 0x71f7ba82a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #5 0x71f7ba82a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #6 0x5b4609dac3e4 in _start (/home/student/lab8/contacts-asan+0x53e4) (BuildId: 79ffd4ef829da69525efd432421353d37d00c668)
+
+SUMMARY: AddressSanitizer: 144 byte(s) leaked in 3 allocation(s).
+===== exit code: 1
+
+===== scenario: add contact
+
+=================================================================
+==23889==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 144 byte(s) in 3 object(s) allocated from:
+    #0 0x796b680fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x581b20d6b4c7 in contact_new src/contacts.c:30
+    #2 0x581b20d6b840 in book_load src/contacts.c:47
+    #3 0x581b20d6cc11 in main src/contacts.c:120
+    #4 0x796b6742a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #5 0x796b6742a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #6 0x581b20d6b3e4 in _start (/home/student/lab8/contacts-asan+0x53e4) (BuildId: 79ffd4ef829da69525efd432421353d37d00c668)
+
+Direct leak of 48 byte(s) in 1 object(s) allocated from:
+    #0 0x796b680fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x581b20d6b4c7 in contact_new src/contacts.c:30
+    #2 0x581b20d6cf33 in main src/contacts.c:130
+    #3 0x796b6742a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #4 0x796b6742a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #5 0x581b20d6b3e4 in _start (/home/student/lab8/contacts-asan+0x53e4) (BuildId: 79ffd4ef829da69525efd432421353d37d00c668)
+
+SUMMARY: AddressSanitizer: 192 byte(s) leaked in 4 allocation(s).
+===== exit code: 1
+
+===== scenario: delete contact
+=================================================================
+==23892==ERROR: AddressSanitizer: heap-use-after-free on address 0x504000000020 at pc 0x72e8012a1a6a bp 0x7ffccae33430 sp 0x7ffccae32ba8
+READ of size 14 at 0x504000000020 thread T0
+    #0 0x72e8012a1a69 in printf_common ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_format.inc:563
+    #1 0x72e8012ce33b in vprintf ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors.inc:1644
+    #2 0x72e8012d0180 in printf ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors.inc:1702
+    #3 0x64ab7d90c812 in book_del src/contacts.c:100
+    #4 0x64ab7d90d195 in main src/contacts.c:134
+    #5 0x72e80062a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #6 0x72e80062a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #7 0x64ab7d90b3e4 in _start (/home/student/lab8/contacts-asan+0x53e4) (BuildId: 79ffd4ef829da69525efd432421353d37d00c668)
+
+0x504000000020 is located 16 bytes inside of 48-byte region [0x504000000010,0x504000000040)
+freed by thread T0 here:
+    #0 0x72e8012fc4d8 in free ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:52
+    #1 0x64ab7d90c451 in book_del src/contacts.c:96
+    #2 0x64ab7d90d195 in main src/contacts.c:134
+    #3 0x72e80062a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #4 0x72e80062a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #5 0x64ab7d90b3e4 in _start (/home/student/lab8/contacts-asan+0x53e4) (BuildId: 79ffd4ef829da69525efd432421353d37d00c668)
+
+previously allocated by thread T0 here:
+    #0 0x72e8012fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x64ab7d90b4c7 in contact_new src/contacts.c:30
+    #2 0x64ab7d90b840 in book_load src/contacts.c:47
+    #3 0x64ab7d90cc11 in main src/contacts.c:120
+    #4 0x72e80062a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #5 0x72e80062a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #6 0x64ab7d90b3e4 in _start (/home/student/lab8/contacts-asan+0x53e4) (BuildId: 79ffd4ef829da69525efd432421353d37d00c668)
+
+SUMMARY: AddressSanitizer: heap-use-after-free ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_format.inc:563 in printf_common
+Shadow bytes around the buggy address:
+  0x503ffffffd80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x503ffffffe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x503ffffffe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x503fffffff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x503fffffff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x504000000000: fa fa fd fd[fd]fd fd fd fa fa 00 00 00 00 00 00
+  0x504000000080: fa fa 00 00 00 00 00 00 fa fa fa fa fa fa fa fa
+  0x504000000100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x504000000180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x504000000200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x504000000280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==23892==ABORTING
+===== exit code: 1
+
+===== scenario: format string in name
+
+=================================================================
+==23894==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 144 byte(s) in 3 object(s) allocated from:
+    #0 0x7777ae2fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x5a3ec71674c7 in contact_new src/contacts.c:30
+    #2 0x5a3ec7167840 in book_load src/contacts.c:47
+    #3 0x5a3ec7168c11 in main src/contacts.c:120
+    #4 0x7777ad62a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #5 0x7777ad62a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #6 0x5a3ec71673e4 in _start (/home/student/lab8/contacts-asan+0x53e4) (BuildId: 79ffd4ef829da69525efd432421353d37d00c668)
+
+Direct leak of 48 byte(s) in 1 object(s) allocated from:
+    #0 0x7777ae2fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x5a3ec71674c7 in contact_new src/contacts.c:30
+    #2 0x5a3ec7168f33 in main src/contacts.c:130
+    #3 0x7777ad62a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #4 0x7777ad62a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #5 0x5a3ec71673e4 in _start (/home/student/lab8/contacts-asan+0x53e4) (BuildId: 79ffd4ef829da69525efd432421353d37d00c668)
+
+SUMMARY: AddressSanitizer: 192 byte(s) leaked in 4 allocation(s).
+===== exit code: 1
+
+===== scenario: name longer than buffer
+=================================================================
+==23897==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x504000000100 at pc 0x737ad88a7923 bp 0x7ffea60151d0 sp 0x7ffea6014978
+WRITE of size 65 at 0x504000000100 thread T0
+    #0 0x737ad88a7922 in strcpy ../../../../src/libsanitizer/asan/asan_interceptors.cpp:563
+    #1 0x592a6e41454b in contact_new src/contacts.c:31
+    #2 0x592a6e415f33 in main src/contacts.c:130
+    #3 0x737ad7c2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #4 0x737ad7c2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #5 0x592a6e4143e4 in _start (/home/student/lab8/contacts-asan+0x53e4) (BuildId: 79ffd4ef829da69525efd432421353d37d00c668)
+
+0x504000000100 is located 0 bytes after 48-byte region [0x5040000000d0,0x504000000100)
+allocated by thread T0 here:
+    #0 0x737ad88fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x592a6e4144c7 in contact_new src/contacts.c:30
+    #2 0x592a6e415f33 in main src/contacts.c:130
+    #3 0x737ad7c2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #4 0x737ad7c2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #5 0x592a6e4143e4 in _start (/home/student/lab8/contacts-asan+0x53e4) (BuildId: 79ffd4ef829da69525efd432421353d37d00c668)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow ../../../../src/libsanitizer/asan/asan_interceptors.cpp:563 in strcpy
+Shadow bytes around the buggy address:
+  0x503ffffffe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x503fffffff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x503fffffff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x504000000000: fa fa 00 00 00 00 00 00 fa fa 00 00 00 00 00 00
+  0x504000000080: fa fa 00 00 00 00 00 00 fa fa 00 00 00 00 00 00
+=>0x504000000100:[fa]fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x504000000180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x504000000200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x504000000280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x504000000300: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x504000000380: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==23897==ABORTING
+===== exit code: 1
+
