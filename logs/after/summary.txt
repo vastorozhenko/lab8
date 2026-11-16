@@ -1,0 +1,8 @@
+Stage:                                       after
+gcc -fanalyzer warnings:                     0
+cppcheck findings (error/warning):           0 (0)
+flawfinder hits (risk level 4-5):            9 (0)
+valgrind errors (all scenarios):             0
+valgrind aborted by heap corruption:         0
+valgrind definitely lost (bytes):            0
+ASan/LSan/UBSan reports:                     0

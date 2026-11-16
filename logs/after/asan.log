@@ -1,0 +1,30 @@
+===== scenario: list
+ 1. Ivan Petrenko: +380501112233
+ 2. Olena Koval: +380671234567
+ 3. Andrii Melnyk: +380931112244
+===== exit code: 0
+
+===== scenario: find existing contact
+Olena Koval: +380671234567
+===== exit code: 0
+
+===== scenario: find missing contact
+Nobody: not found
+===== exit code: 0
+
+===== scenario: add contact
+added: Taras Bondar
+===== exit code: 0
+
+===== scenario: delete contact
+deleted: Ivan Petrenko
+===== exit code: 0
+
+===== scenario: format string in name
+added: %p.%p.%p.%p
+===== exit code: 0
+
+===== scenario: name longer than buffer
+invalid contact: name 1-31 chars, phone 1-15 chars
+===== exit code: 1
+

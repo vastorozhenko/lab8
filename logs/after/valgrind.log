@@ -1,0 +1,128 @@
+===== scenario: list
+==23981== Memcheck, a memory error detector
+==23981== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==23981== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==23981== Command: ./contacts /tmp/tmp.x6x108siDw list
+==23981== 
+ 1. Ivan Petrenko: +380501112233
+ 2. Olena Koval: +380671234567
+ 3. Andrii Melnyk: +380931112244
+==23981== 
+==23981== HEAP SUMMARY:
+==23981==     in use at exit: 0 bytes in 0 blocks
+==23981==   total heap usage: 6 allocs, 6 frees, 8,808 bytes allocated
+==23981== 
+==23981== All heap blocks were freed -- no leaks are possible
+==23981== 
+==23981== For lists of detected and suppressed errors, rerun with: -s
+==23981== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+===== exit code: 0
+
+===== scenario: find existing contact
+==23983== Memcheck, a memory error detector
+==23983== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==23983== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==23983== Command: ./contacts /tmp/tmp.x6x108siDw find Olena\ Koval
+==23983== 
+Olena Koval: +380671234567
+==23983== 
+==23983== HEAP SUMMARY:
+==23983==     in use at exit: 0 bytes in 0 blocks
+==23983==   total heap usage: 6 allocs, 6 frees, 8,808 bytes allocated
+==23983== 
+==23983== All heap blocks were freed -- no leaks are possible
+==23983== 
+==23983== For lists of detected and suppressed errors, rerun with: -s
+==23983== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+===== exit code: 0
+
+===== scenario: find missing contact
+==23985== Memcheck, a memory error detector
+==23985== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==23985== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==23985== Command: ./contacts /tmp/tmp.x6x108siDw find Nobody
+==23985== 
+Nobody: not found
+==23985== 
+==23985== HEAP SUMMARY:
+==23985==     in use at exit: 0 bytes in 0 blocks
+==23985==   total heap usage: 6 allocs, 6 frees, 8,808 bytes allocated
+==23985== 
+==23985== All heap blocks were freed -- no leaks are possible
+==23985== 
+==23985== For lists of detected and suppressed errors, rerun with: -s
+==23985== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+===== exit code: 0
+
+===== scenario: add contact
+==23987== Memcheck, a memory error detector
+==23987== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==23987== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==23987== Command: ./contacts /tmp/tmp.x6x108siDw add Taras\ Bondar +380661234567
+==23987== 
+added: Taras Bondar
+==23987== 
+==23987== HEAP SUMMARY:
+==23987==     in use at exit: 0 bytes in 0 blocks
+==23987==   total heap usage: 9 allocs, 9 frees, 13,424 bytes allocated
+==23987== 
+==23987== All heap blocks were freed -- no leaks are possible
+==23987== 
+==23987== For lists of detected and suppressed errors, rerun with: -s
+==23987== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+===== exit code: 0
+
+===== scenario: delete contact
+==23989== Memcheck, a memory error detector
+==23989== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==23989== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==23989== Command: ./contacts /tmp/tmp.x6x108siDw del Ivan\ Petrenko
+==23989== 
+deleted: Ivan Petrenko
+==23989== 
+==23989== HEAP SUMMARY:
+==23989==     in use at exit: 0 bytes in 0 blocks
+==23989==   total heap usage: 8 allocs, 8 frees, 13,376 bytes allocated
+==23989== 
+==23989== All heap blocks were freed -- no leaks are possible
+==23989== 
+==23989== For lists of detected and suppressed errors, rerun with: -s
+==23989== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+===== exit code: 0
+
+===== scenario: format string in name
+==23991== Memcheck, a memory error detector
+==23991== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==23991== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==23991== Command: ./contacts /tmp/tmp.x6x108siDw add %p.%p.%p.%p +380000000000
+==23991== 
+added: %p.%p.%p.%p
+==23991== 
+==23991== HEAP SUMMARY:
+==23991==     in use at exit: 0 bytes in 0 blocks
+==23991==   total heap usage: 9 allocs, 9 frees, 13,424 bytes allocated
+==23991== 
+==23991== All heap blocks were freed -- no leaks are possible
+==23991== 
+==23991== For lists of detected and suppressed errors, rerun with: -s
+==23991== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+===== exit code: 0
+
+===== scenario: name longer than buffer
+==23996== Memcheck, a memory error detector
+==23996== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==23996== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==23996== Command: ./contacts /tmp/tmp.x6x108siDw add AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA +380000000000
+==23996== 
+invalid contact: name 1-31 chars, phone 1-15 chars
+==23996== 
+==23996== HEAP SUMMARY:
+==23996==     in use at exit: 0 bytes in 0 blocks
+==23996==   total heap usage: 5 allocs, 5 frees, 4,712 bytes allocated
+==23996== 
+==23996== All heap blocks were freed -- no leaks are possible
+==23996== 
+==23996== For lists of detected and suppressed errors, rerun with: -s
+==23996== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+===== exit code: 1
+
